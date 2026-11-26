@@ -113,7 +113,7 @@ task:
 
 ## Install
 
-The npm package is not published yet, so install from this repo:
+This package is not on npm yet, so install it from this repository:
 
 ```bash
 git clone https://github.com/8yy6xg/pi-ssh-remote.git
@@ -122,12 +122,9 @@ bun install
 pi -e ./index.ts --ssh devbox:/srv/project
 ```
 
-Once the package is on npm, this will also work, and the package should appear
-on [pi.dev/packages](https://pi.dev/packages):
-
-```bash
-pi install npm:@8yy6xg/pi-ssh-remote
-```
+A public npm package (`@8yy6xg/pi-ssh-remote`) and a listing on
+[pi.dev/packages](https://pi.dev/packages) are planned, but neither is
+available yet. Use the commands above until then.
 
 The system OpenSSH client (`ssh` or `ssh.exe`) must be available on `PATH`.
 SSH Remote uses it directly in OpenSSH mode, for `ssh -G` configuration
@@ -141,18 +138,22 @@ resolution in `ssh2` mode, and for remote background jobs.
 
 ## Quick start
 
+Until the package is on npm, start Pi with `-e ./index.ts` after installing
+from this repository, as shown in [Install](#install). The examples below
+only vary the SSH target:
+
 ```bash
 # Unix workspace
-pi --ssh devbox:/srv/project
+pi -e ./index.ts --ssh devbox:/srv/project
 
 # Unix workspace on a non-standard SSH port
-pi --ssh deploy@devbox:2201:/srv/project
+pi -e ./index.ts --ssh deploy@devbox:2201:/srv/project
 
 # Windows workspace, port 2201 plus remote cwd (quote the target in your shell)
-pi --ssh 'winuser@winbox:2201:C:\Users\winuser\project'
+pi -e ./index.ts --ssh 'winuser@winbox:2201:C:\Users\winuser\project'
 
 # Windows workspace on the configured/default port
-pi --ssh 'winuser@winbox:C:\Users\winuser\project'
+pi -e ./index.ts --ssh 'winuser@winbox:C:\Users\winuser\project'
 ```
 
 The default transport is `auto`:
@@ -210,10 +211,10 @@ Host devbox
 
 ```bash
 # Use the Port from the alias
-pi --ssh devbox:/srv/project
+pi -e ./index.ts --ssh devbox:/srv/project
 
 # Override it for one command without editing the config
-pi --ssh devbox:22:/srv/project
+pi -e ./index.ts --ssh devbox:22:/srv/project
 ```
 
 ## Targets and paths
