@@ -1,0 +1,139 @@
+{
+  "initialConnect": {
+    "ok": true,
+    "ms": 904,
+    "status": "SSH: Connected",
+    "notifications": [
+      "SSH remote active: pi-ssh-verify:/home/pisshverify/workspace (unix/bash; OpenSSH/multiplexed)"
+    ]
+  },
+  "toolsBeforeDrop": {
+    "ok": true,
+    "response": {
+      "id": "req-1",
+      "type": "response",
+      "command": "bash",
+      "success": true,
+      "data": {
+        "output": "pi-ssh-remote-verify-ok\n/home/pisshverify/workspace\nUSER=pisshverify\n",
+        "exitCode": 0,
+        "cancelled": false,
+        "truncated": false
+      }
+    }
+  },
+  "drop": {
+    "at": "2026-11-26T04:07:31.860Z",
+    "listening": false
+  },
+  "connectionLost": {
+    "ok": true,
+    "ms": 0,
+    "status": "SSH: Reconnecting in 2s (#1)",
+    "notifications": [
+      "SSH remote active: pi-ssh-verify:/home/pisshverify/workspace (unix/bash; OpenSSH/multiplexed)",
+      "SSH connection lost: OpenSSH ControlMaster closed (255): Connection to 127.0.0.1 closed by remote host.. Reconnecting automatically."
+    ]
+  },
+  "failClosedWhileDown": {
+    "ok": true,
+    "response": {
+      "success": false,
+      "error": "SSH remote is unavailable: OpenSSH ControlMaster closed (255): Connection to 127.0.0.1 closed by remote host.",
+      "response": {
+        "id": "req-2",
+        "type": "response",
+        "command": "bash",
+        "success": false,
+        "error": "SSH remote is unavailable: OpenSSH ControlMaster closed (255): Connection to 127.0.0.1 closed by remote host."
+      }
+    }
+  },
+  "restore": {
+    "at": "2026-11-26T04:07:31.954Z",
+    "ok": true,
+    "ms": 2
+  },
+  "autoReconnect": {
+    "ok": true,
+    "ms": 2107,
+    "status": "SSH: Connected",
+    "activeNotifyCount": 2,
+    "notificationsAfterRestore": [
+      "SSH remote active: pi-ssh-verify:/home/pisshverify/workspace (unix/bash; OpenSSH/multiplexed)"
+    ]
+  },
+  "toolsAfterAutoReconnect": {
+    "ok": true,
+    "response": {
+      "id": "req-3",
+      "type": "response",
+      "command": "bash",
+      "success": true,
+      "data": {
+        "output": "pi-ssh-remote-verify-ok\n/home/pisshverify/workspace\n",
+        "exitCode": 0,
+        "cancelled": false,
+        "truncated": false
+      }
+    }
+  },
+  "manualReconnect": {
+    "ok": true,
+    "lostMs": 0,
+    "reconnectMs": 0,
+    "sincePromptMs": 110,
+    "sinceDropMs": 203,
+    "status": "SSH: Connected",
+    "prompt": {
+      "id": "req-4",
+      "type": "response",
+      "command": "prompt",
+      "success": true,
+      "data": {
+        "disposition": "handled"
+      }
+    }
+  },
+  "toolsAfterManualReconnect": {
+    "ok": true,
+    "response": {
+      "id": "req-5",
+      "type": "response",
+      "command": "bash",
+      "success": true,
+      "data": {
+        "output": "after-manual\n/home/pisshverify/workspace\n",
+        "exitCode": 0,
+        "cancelled": false,
+        "truncated": false
+      }
+    }
+  },
+  "sshExitNoAutoReconnect": {
+    "ok": true,
+    "exitMs": 0,
+    "laterActive": false,
+    "prompt": {
+      "id": "req-6",
+      "type": "response",
+      "command": "prompt",
+      "success": true,
+      "data": {
+        "disposition": "handled"
+      }
+    }
+  },
+  "overall": {
+    "initialConnect": true,
+    "toolsBeforeDrop": true,
+    "connectionLost": true,
+    "failClosedWhileDown": true,
+    "autoReconnect": true,
+    "toolsAfterAutoReconnect": true,
+    "manualReconnect": true,
+    "toolsAfterManualReconnect": true,
+    "sshExitNoAutoReconnect": true
+  },
+  "passed": true
+}
