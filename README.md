@@ -1,5 +1,40 @@
 # @8yy6xg/pi-ssh-remote
 
+This is a standalone fork of the `ssh-remote` extension from
+[99percentpeople/pi-extensions](https://github.com/99percentpeople/pi-extensions/tree/master/extensions/ssh-remote)
+(published as [`@99percentpeople/pi-ssh-remote`](https://www.npmjs.com/package/@99percentpeople/pi-ssh-remote)).
+It is not the official upstream package. The new work in this fork is
+default-on, configurable automatic reconnect after an unexpected SSH drop.
+
+## Project status
+
+- **Upstream base:** `@99percentpeople/pi-ssh-remote` 0.6.3, extracted into its own repo instead of copying the whole monorepo
+- **This package:** `@8yy6xg/pi-ssh-remote` 0.7.0, MIT (copyright Zach Yuen and 8yy6xg)
+- **Source:** [github.com/8yy6xg/pi-ssh-remote](https://github.com/8yy6xg/pi-ssh-remote)
+- **npm / [pi.dev](https://pi.dev/packages):** not published yet. Until it is, load the package from this repo (see [Install](#install))
+- **Verified:** automatic reconnect was tested against a real [Pi coding agent](https://pi.dev/) 1.6.1 session with a simulated SSH drop and restore. The write-up is in [`docs/verification-ssh-reconnect.md`](./docs/verification-ssh-reconnect.md)
+
+## What this fork adds
+
+Unexpected loss of an active SSH session now reconnects automatically. The
+default policy is enabled, with a 1 second initial delay, multiplier 2, a 30
+second cap, full jitter, and unlimited attempts. You can change these in
+`/99settings` or in the `ssh-remote.reconnect` object in `99extensions.json`.
+
+`/ssh-exit`, authentication failure, and a host-key change do not auto-retry.
+`/ssh-reconnect` still retries immediately and resets backoff. Tools stay
+fail-closed while the session is disconnected or reconnecting. The rest of the
+SSH Remote behavior comes from upstream.
+
+## Dependencies
+
+- Peer: the [Pi coding agent](https://pi.dev/) (`@earendil-works/pi-coding-agent` and `@earendil-works/pi-tui`)
+- Runtime, from published upstream packages: `@99percentpeople/pi-shared-settings` and `@99percentpeople/pi-workspace-files`. This repo does not vendor the whole monorepo
+- Optional: [`@99percentpeople/pi-background-tasks`](https://www.npmjs.com/package/@99percentpeople/pi-background-tasks) for remote PTY/TUI apps such as `lazygit` and `htop`
+- System OpenSSH client (`ssh` or `ssh.exe`) on `PATH`. The `ssh2` library is used for the bundled transport
+
+## What it does
+
 Use the local [Pi coding agent](https://pi.dev/) against a remote Unix or
 Windows workspace without leaving the current Pi conversation.
 
@@ -57,6 +92,10 @@ task:
 
 ## Contents
 
+- [Project status](#project-status)
+- [What this fork adds](#what-this-fork-adds)
+- [Dependencies](#dependencies)
+- [What it does](#what-it-does)
 - [Demo](#demo)
 - [Install](#install)
 - [Quick start](#quick-start)
@@ -73,6 +112,18 @@ task:
 - [Security](#security)
 
 ## Install
+
+The npm package is not published yet, so install from this repo:
+
+```bash
+git clone https://github.com/8yy6xg/pi-ssh-remote.git
+cd pi-ssh-remote
+bun install
+pi -e ./index.ts --ssh devbox:/srv/project
+```
+
+Once the package is on npm, this will also work, and the package should appear
+on [pi.dev/packages](https://pi.dev/packages):
 
 ```bash
 pi install npm:@8yy6xg/pi-ssh-remote
@@ -868,11 +919,8 @@ bun run test:unit
 pi -e ./index.ts --ssh devbox:/srv/project
 ```
 
-This package is a standalone fork of
-[`@99percentpeople/pi-ssh-remote`](https://www.npmjs.com/package/@99percentpeople/pi-ssh-remote)
-with automatic reconnect. It depends on the published
-`@99percentpeople/pi-shared-settings` and `@99percentpeople/pi-workspace-files`
-packages.
+Origin, current status, new reconnect behavior, and dependencies are documented
+at the top of this README.
 
 ## License
 
